@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CarChat</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">CarChat</span>
+      <span class="brand-sub">Inventory answers you can check</span>
+    </div>
+    <div class="session" id="session" hidden>
+      <span class="role-badge" id="role-badge"></span>
+      <button type="button" class="link-button" id="sign-out">Sign out</button>
+    </div>
+  </header>
+
+  <p class="notice">Demo data. Vehicles are real models from the EPA fuel economy dataset; prices, costs and lot details are generated. No real dealership's inventory is shown.</p>
+
+  <!-- Sign-in view -->
+  <main class="card sign-in" id="sign-in-view" hidden>
+    <h1>Sign in</h1>
+    <p class="muted">Enter the passcode for your role. The passcode decides what you can see.</p>
+    <form id="sign-in-form" autocomplete="off">
+      <label for="passcode">Passcode</label>
+      <input id="passcode" name="passcode" type="password" required maxlength="200">
+      <button type="submit" class="primary">Sign in</button>
+      <p class="error" id="sign-in-error" role="alert" hidden></p>
+    </form>
+  </main>
+
+  <!-- Chat view -->
+  <main class="chat" id="chat-view" hidden>
+    <section class="intro card" id="intro">
+      <h1>Ask about the inventory</h1>
+      <p class="muted">Every answer comes from a database query. The query and the rows it returned are shown under each answer so you can check it.</p>
+      <div class="examples" id="examples"></div>
+    </section>
+
+    <section class="messages" id="messages" aria-live="polite"></section>
+
+    <form class="ask" id="ask-form">
+      <label class="visually-hidden" for="question">Your question</label>
+      <input id="question" name="question" type="text" maxlength="500" required
+             placeholder="For example: how many used trucks have been on the lot more than 60 days?" autocomplete="off">
+      <button type="submit" class="primary" id="ask-button">Ask</button>
+    </form>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -19,6 +19,11 @@ What Claude got wrong during the build, and how it was caught.
 - **Answers came back with Markdown bold** (`**3**`), which a plain HTML page would show as literal asterisks. Caught by reading the output, not by a test. Fixed in the system prompt.
 - **"On the lot" is a judgment call.** The model counts only `available` vehicles unless asked otherwise, and says so. "How many used trucks under $30,000 over 60 days" is 3 available but 5 across all statuses. Either could be what a manager means; the answer states which one it used.
 
+## Login and page
+
+- **A security test failed, and it was the test.** The "tampered cookie is rejected" test got a 200. That looked like a signing flaw. It was not: the test client kept the genuine cookie and sent it alongside the tampered one. Sending only the tampered cookie gets a 401. Worth the five minutes to check rather than assume either way.
+- **Not checked by Claude:** signing in through the page with a real passcode. The API was tested end to end over HTTP in both roles, and the chat layout was checked with sample data, but typing a passcode into the page is still to be done by a person.
+
 ## Known approximations (not bugs, but worth knowing)
 
 - `body_style` is mapped from the EPA size class, which is about interior volume, not shape. A Dodge Challenger is an EPA "Midsize Car" and so shows as a sedan.
